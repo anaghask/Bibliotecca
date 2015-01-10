@@ -5,8 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -56,6 +55,20 @@ public class BibliotecaLibraryTest {
         bibliotecaLibrary.BookList(printStream);
 
         assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldDisplayMenu(){
+        bibliotecaLibrary.MenuList(printStream);
+        String expectedOutput = "Menu\n1:Display\n";
+        assertEquals(expectedOutput, byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldBeAbleToSelectFromMenu(){
+        String inputForMenu ="1";
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
     }
 
 }
