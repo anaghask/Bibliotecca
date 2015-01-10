@@ -19,7 +19,7 @@ public class BibliotecaLibraryTest {
     @Before
     public void setPrintStream() {
         printStream = new PrintStream(byteArrayOutputStream);
-        bibliotecaLibrary = new BibliotecaLibrary(new ArrayList<StringBuilder>());
+        bibliotecaLibrary = new BibliotecaLibrary(new ArrayList<Book>());
 
     }
 
@@ -36,18 +36,19 @@ public class BibliotecaLibraryTest {
 
     @Test
     public void shouldDisplayBookList(){
-        StringBuilder book1 = new StringBuilder("Harry Potter");
-        StringBuilder book2 = new StringBuilder("Angels and Demons");
-        ArrayList<StringBuilder> bookList = new ArrayList<StringBuilder>();
+
+        Book book1 = new Book("J K Rowling","Harry Potter",1992);
+        Book book2 = new Book("Dan Brown","Angels and Demons",1245);
+        ArrayList<Book> bookList = new ArrayList<Book>();
 
         bookList.add(book1);
         bookList.add(book2);
 
         StringBuilder newLine = new StringBuilder("\n");
-        StringBuilder expectedOutput = new StringBuilder();
+        StringBuilder expectedOutput = new StringBuilder("Author\t\tBook Name\t\tYear Of Publication\n");
 
-        for (StringBuilder book : bookList) {
-            expectedOutput.append(book);
+        for (Book book : bookList) {
+            expectedOutput.append(book.toString());
             expectedOutput.append(newLine);
         }
 
