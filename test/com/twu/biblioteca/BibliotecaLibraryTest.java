@@ -20,7 +20,6 @@ public class BibliotecaLibraryTest {
     public void setPrintStream() {
         printStream = new PrintStream(byteArrayOutputStream);
         bibliotecaLibrary = new BibliotecaLibrary(new ArrayList<Book>());
-
     }
 
     @After
@@ -35,29 +34,6 @@ public class BibliotecaLibraryTest {
         assertEquals("Welcome", byteArrayOutputStream.toString().trim());
     }
 
-    @Test
-    public void shouldDisplayBookList(){
-
-        Book book1 = new Book("J K Rowling","Harry Potter",1992, false);
-        Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
-        ArrayList<Book> bookList = new ArrayList<Book>();
-
-        bookList.add(book1);
-        bookList.add(book2);
-
-        StringBuilder newLine = new StringBuilder("\n");
-        StringBuilder expectedOutput = new StringBuilder("Author\t\tBook Name\t\tYear Of Publication\n");
-
-        for (Book book : bookList) {
-            expectedOutput.append(book.toString());
-            expectedOutput.append(newLine);
-        }
-
-        bibliotecaLibrary = new BibliotecaLibrary(bookList);
-        bibliotecaLibrary.bookList(printStream);
-
-        assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
-    }
 
     @Test
     public void shouldDisplayMenu(){
@@ -75,25 +51,6 @@ public class BibliotecaLibraryTest {
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
-    @Test
-    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() {
-        String inputForMenu ="10\n";
-        InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
-        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
-        String expectedOutput = menuString + "Invalid Option\n"+menuString;
-
-        assertEquals(expectedOutput,byteArrayOutputStream.toString());
-
-    }
-
-    @Test
-    public void shouldBeAbleToQuitOnOptionSelection()  {
-        String inputForMenu ="3";
-        InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
-        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
-
-        assertEquals(menuString,byteArrayOutputStream.toString());
-    }
 
     @Test
     public void shouldBeAbleToCheckoutBookOnOptionSelection()  {
@@ -107,8 +64,6 @@ public class BibliotecaLibraryTest {
         bookList.add(book2);
 
         StringBuilder expectedOutput = new StringBuilder("");
-
-        StringBuilder newLine = new StringBuilder("\n");
 
         bibliotecaLibrary = new BibliotecaLibrary(bookList);
         bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
