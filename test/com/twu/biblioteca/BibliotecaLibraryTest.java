@@ -69,6 +69,16 @@ public class BibliotecaLibraryTest {
         String inputForMenu ="1";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
         bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
+        String expectedOutput = "Menu\n1:Display\n";
+
+        assertEquals(expectedOutput, byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection(){
+        String inputForMenu ="3";
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
     }
 
 }

@@ -32,11 +32,17 @@ public class BibliotecaLibrary {
     }
 
     public void SelectOption(InputStream inputStream, PrintStream printStream){
-        Scanner scanner = new Scanner(inputStream).useDelimiter("\n");
-        int option = Integer.parseInt(scanner.next());
-        switch (option){
-            case 1:
-                BookList(printStream);
+        Scanner scanner = new Scanner(inputStream);
+        int option;
+        while(true) {
+        option = Integer.parseInt(scanner.next());
+            switch (option) {
+                case 1:
+                    BookList(printStream);
+                    break;
+                default:
+                    printStream.println("Invalid Option");
+            }
         }
 
     }
