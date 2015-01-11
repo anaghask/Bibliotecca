@@ -25,6 +25,7 @@ public class BibliotecaLibraryTest {
     @After
     public void deletePrintStream() {
         printStream = null;
+        byteArrayOutputStream = null;
     }
 
     @Test
@@ -60,25 +61,28 @@ public class BibliotecaLibraryTest {
     @Test
     public void shouldDisplayMenu(){
         bibliotecaLibrary.MenuList(printStream);
-        String expectedOutput = "Menu\n1:Display\n";
+        String expectedOutput = "Menu\n1:Display\n2:Quit\n";
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
     @Test
-    public void shouldBeAbleToSelectFromMenu(){
+    public void shouldBeAbleToSelectFromMenu() throws IOException {
         String inputForMenu ="1";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
         bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
-        String expectedOutput = "Menu\n1:Display\n";
+        String expectedOutput = "Menu\n1:Display\n2:Quit\n";
+        expectedOutput+="Author\t\tBook Name\t\tYear Of Publication\n";
 
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
     @Test
-    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection(){
+    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() throws IOException {
         String inputForMenu ="3";
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
         bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
     }
+
+
 
 }

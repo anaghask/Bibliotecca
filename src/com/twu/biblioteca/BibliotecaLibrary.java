@@ -34,8 +34,9 @@ public class BibliotecaLibrary {
     public void SelectOption(InputStream inputStream, PrintStream printStream){
         Scanner scanner = new Scanner(inputStream);
         int option;
-        while(true) {
-        option = Integer.parseInt(scanner.next());
+        while(scanner.hasNext()) {
+            MenuList(printStream);
+            option = Integer.parseInt(scanner.nextLine());
             switch (option) {
                 case 1:
                     BookList(printStream);
