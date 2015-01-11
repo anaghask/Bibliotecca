@@ -139,7 +139,7 @@ public class MenuTest{
         bookList.add(book2);
         StringBuilder expectedOutput = new StringBuilder("");
 
-        expectedOutput.append("Enter book name for return\n");
+        expectedOutput.append("Enter book name for return\nThank you for returning the book\n");
 
         menu.executeMenu(printStream, scanner, bookList);
         assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());

@@ -47,6 +47,7 @@ public enum Menu {
             bookName = scanner.nextLine();
             for (Book book : listOfBook){
                 if(book.bookName.compareToIgnoreCase(bookName) == 0 && book.checkOutStatus){
+                    printStream.println("Thank you for returning the book");
                     book.returnBook();
                     break;
                 }

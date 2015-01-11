@@ -14,7 +14,7 @@ public class BibliotecaLibraryTest {
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     PrintStream printStream;
     private BibliotecaLibrary bibliotecaLibrary;
-    private String menuString = "1:Display\n2:CheckOut Book\n3:Quit\n";
+    private String menuString = "1:Display\n2:CheckOut Book\n3:Return Book\n4:Quit\n";
 
     @Before
     public void setPrintStream() {
