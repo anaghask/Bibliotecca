@@ -95,7 +95,7 @@ public class MenuTest{
         bookList.add(book2);
         StringBuilder expectedOutput = new StringBuilder("");
 
-        expectedOutput.append("Enter book name for checkout\n");
+        expectedOutput.append("Enter book name for checkout\nThank you! Enjoy the book\n");
 
         assertTrue(menu.executeMenu(printStream , scanner ,bookList));
         assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());

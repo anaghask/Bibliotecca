@@ -22,12 +22,18 @@ public enum Menu {
         public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
             String bookName;
             printStream.println("Enter book name for checkout");
+            boolean flag = false;
             bookName = scanner.nextLine();
             for (Book book : listOfBook){
-                if(book.bookName.compareToIgnoreCase(bookName) == 0){
+                if(book.bookName.compareToIgnoreCase(bookName) == 0 && !book.checkOutStatus){
                     book.checkOutBook();
                     printStream.println("Thank you! Enjoy the book");
+                    flag = true;
+                    break;
                 }
+            }
+            if (!flag){
+                    printStream.println("That book is not available.");
             }
             return true;
         }
