@@ -26,6 +26,7 @@ public enum Menu {
             for (Book book : listOfBook){
                 if(book.bookName.compareToIgnoreCase(bookName) == 0){
                     book.checkOutBook();
+                    printStream.println("Thank you! Enjoy the book");
                 }
             }
             return true;
