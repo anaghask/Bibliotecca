@@ -39,14 +39,30 @@ public enum Menu {
         }
     },
 
-    QUIT(3,"Quit") {
+    RETURN(3,"Return Book") {
+        @Override
+        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
+            String bookName;
+            printStream.println("Enter book name for return");
+            bookName = scanner.nextLine();
+            for (Book book : listOfBook){
+                if(book.bookName.compareToIgnoreCase(bookName) == 0 && book.checkOutStatus){
+                    book.returnBook();
+                    break;
+                }
+            }
+            return true;
+        }
+    },
+
+    QUIT(4,"Quit") {
         @Override
         public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
         return false;
         }
     },
 
-    INVALID(4,"Invalid Option") {
+    INVALID(5,"Invalid Option") {
         @Override
         public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
             printStream.println("Invalid Option");

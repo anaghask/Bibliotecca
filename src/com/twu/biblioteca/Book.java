@@ -17,7 +17,7 @@ public class Book {
         this.checkOutStatus = true;
     }
 
-    public void checkInBook(){
+    public void returnBook(){
         this.checkOutStatus = false;
     }
 
