@@ -145,4 +145,26 @@ public class MenuTest{
         assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
     }
 
+    @Test
+    public void shouldNotBeAbleToReturnBookOnInValidInput()  {
+        Menu menu = Menu.getMenu(3);
+
+        String inputForMenu ="Harry \n";
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        Book book1 = new Book("J K Rowling","Harry Potter",1992, true);
+        Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
+        ArrayList<Book> bookList = new ArrayList<Book>();
+
+        scanner = new Scanner(byteArrayInputStream);
+
+        bookList.add(book1);
+        bookList.add(book2);
+        StringBuilder expectedOutput = new StringBuilder("");
+
+        expectedOutput.append("Enter book name for return\nThat is not a valid book to return.\n");
+
+        menu.executeMenu(printStream, scanner, bookList);
+        assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
+    }
+
 }

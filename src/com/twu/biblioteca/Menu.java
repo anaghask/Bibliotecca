@@ -45,12 +45,17 @@ public enum Menu {
             String bookName;
             printStream.println("Enter book name for return");
             bookName = scanner.nextLine();
+            boolean flag = false;
             for (Book book : listOfBook){
                 if(book.bookName.compareToIgnoreCase(bookName) == 0 && book.checkOutStatus){
                     printStream.println("Thank you for returning the book");
                     book.returnBook();
+                    flag =true;
                     break;
                 }
+            }
+            if(!flag){
+                printStream.println("That is not a valid book to return.");
             }
             return true;
         }
