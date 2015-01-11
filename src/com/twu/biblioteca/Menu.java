@@ -2,7 +2,8 @@ package com.twu.biblioteca;
 
 public enum Menu {
     DISPLAY(1,"Display"),
-    QUIT(2,"Quit");
+    CHECKOUT(2,"CheckOut Book"),
+    QUIT(3,"Quit");
 
     private final int index;
     private final String name;

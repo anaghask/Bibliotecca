@@ -2,13 +2,23 @@ package com.twu.biblioteca;
 
 public class Book {
     private final String author;
-    private final String bookName;
+    public final String bookName;
     private final int yearPublished;
+    public boolean checkOutStatus;
 
-    public Book(String author, String bookName, int yearPublished) {
+    public Book(String author, String bookName, int yearPublished,boolean checkOut) {
         this.author = author;
         this.bookName = bookName;
         this.yearPublished = yearPublished;
+        this.checkOutStatus = checkOut;
+    }
+
+    public void checkOutBook(){
+        this.checkOutStatus = true;
+    }
+
+    public void checkInBook(){
+        this.checkOutStatus = false;
     }
 
     @Override

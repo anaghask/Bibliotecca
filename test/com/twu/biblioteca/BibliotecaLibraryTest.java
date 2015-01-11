@@ -14,7 +14,7 @@ public class BibliotecaLibraryTest {
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     PrintStream printStream;
     private BibliotecaLibrary bibliotecaLibrary;
-    private String menuString = "Menu\n1:Display\n2:Quit\n";
+    private String menuString = "1:Display\n2:CheckOut Book\n3:Quit\n";
 
     @Before
     public void setPrintStream() {
@@ -31,15 +31,15 @@ public class BibliotecaLibraryTest {
 
     @Test
     public void shouldShowWelcomeMessageOnStart() {
-        bibliotecaLibrary.WelcomeMessage(printStream);
+        bibliotecaLibrary.welcomeMessage(printStream);
         assertEquals("Welcome", byteArrayOutputStream.toString().trim());
     }
 
     @Test
     public void shouldDisplayBookList(){
 
-        Book book1 = new Book("J K Rowling","Harry Potter",1992);
-        Book book2 = new Book("Dan Brown","Angels and Demons",1245);
+        Book book1 = new Book("J K Rowling","Harry Potter",1992, false);
+        Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
         ArrayList<Book> bookList = new ArrayList<Book>();
 
         bookList.add(book1);
@@ -54,34 +54,33 @@ public class BibliotecaLibraryTest {
         }
 
         bibliotecaLibrary = new BibliotecaLibrary(bookList);
-        bibliotecaLibrary.BookList(printStream);
+        bibliotecaLibrary.bookList(printStream);
 
         assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
     }
 
     @Test
     public void shouldDisplayMenu(){
-        bibliotecaLibrary.MenuList(printStream);
-        String expectedOutput = "Menu\n1:Display\n2:Quit\n";
-        assertEquals(expectedOutput, byteArrayOutputStream.toString());
+        bibliotecaLibrary.menuList(printStream);
+        assertEquals(menuString, byteArrayOutputStream.toString());
     }
 
     @Test
     public void shouldBeAbleToSelectFromMenu(){
         String inputForMenu ="1";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
-        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
-        String expectedOutput = menuString+"Author\t\tBook Name\t\tYear Of Publication\n";
+        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
+        String expectedOutput = menuString+"Author\t\tBook Name\t\tYear Of Publication\n"+menuString;
 
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
     @Test
     public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() {
-        String inputForMenu ="3";
+        String inputForMenu ="10\n";
         InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
-        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
-        String expectedOutput = menuString + "Invalid Option\n";
+        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
+        String expectedOutput = menuString + "Invalid Option\n"+menuString;
 
         assertEquals(expectedOutput,byteArrayOutputStream.toString());
 
@@ -89,11 +88,34 @@ public class BibliotecaLibraryTest {
 
     @Test
     public void shouldBeAbleToQuitOnOptionSelection()  {
-        String inputForMenu ="2";
+        String inputForMenu ="3";
         InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
-        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
+        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
 
-        assertEquals("",byteArrayOutputStream.toString());
+        assertEquals(menuString,byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldBeAbleToCheckoutBookOnOptionSelection()  {
+        String inputForMenu ="2\nHarry Potter\n1";
+        InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        Book book1 = new Book("J K Rowling","Harry Potter",1992, false);
+        Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
+        ArrayList<Book> bookList = new ArrayList<Book>();
+
+        bookList.add(book1);
+        bookList.add(book2);
+
+        StringBuilder expectedOutput = new StringBuilder("");
+
+        StringBuilder newLine = new StringBuilder("\n");
+
+        bibliotecaLibrary = new BibliotecaLibrary(bookList);
+        bibliotecaLibrary.selectOption(byteArrayInputStream, printStream);
+
+        expectedOutput.append(menuString+"Enter book name for checkout\n");
+        expectedOutput.append(menuString+"Author\t\tBook Name\t\tYear Of Publication\n"+"Dan Brown\tAngels and Demons\t1245\n"+menuString);
+        assertEquals(expectedOutput.toString(), byteArrayOutputStream.toString());
     }
 
 
