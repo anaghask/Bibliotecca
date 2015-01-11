@@ -35,15 +35,17 @@ public class BibliotecaLibrary {
         Scanner scanner = new Scanner(inputStream);
         int option;
         while(scanner.hasNext()) {
-            MenuList(printStream);
             option = Integer.parseInt(scanner.nextLine());
             switch (option) {
                 case 1:
                     BookList(printStream);
                     break;
+                case 2:
+                    return;
                 default:
                     printStream.println("Invalid Option");
             }
+            MenuList(printStream);
         }
 
     }

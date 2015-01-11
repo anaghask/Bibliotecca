@@ -14,6 +14,7 @@ public class BibliotecaLibraryTest {
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     PrintStream printStream;
     private BibliotecaLibrary bibliotecaLibrary;
+    private String menuString = "Menu\n1:Display\n2:Quit\n";
 
     @Before
     public void setPrintStream() {
@@ -66,21 +67,33 @@ public class BibliotecaLibraryTest {
     }
 
     @Test
-    public void shouldBeAbleToSelectFromMenu() throws IOException {
+    public void shouldBeAbleToSelectFromMenu(){
         String inputForMenu ="1";
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
         bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
-        String expectedOutput = "Menu\n1:Display\n2:Quit\n";
-        expectedOutput+="Author\t\tBook Name\t\tYear Of Publication\n";
+        String expectedOutput = menuString+"Author\t\tBook Name\t\tYear Of Publication\n";
 
         assertEquals(expectedOutput, byteArrayOutputStream.toString());
     }
 
     @Test
-    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() throws IOException {
+    public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() {
         String inputForMenu ="3";
         InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
         bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
+        String expectedOutput = menuString + "Invalid Option\n";
+
+        assertEquals(expectedOutput,byteArrayOutputStream.toString());
+
+    }
+
+    @Test
+    public void shouldBeAbleToQuitOnOptionSelection()  {
+        String inputForMenu ="2";
+        InputStream byteArrayInputStream = new ByteArrayInputStream(inputForMenu.getBytes());
+        bibliotecaLibrary.SelectOption(byteArrayInputStream,printStream);
+
+        assertEquals("",byteArrayOutputStream.toString());
     }
 
 
