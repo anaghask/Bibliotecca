@@ -4,20 +4,20 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BibliotecaLibrary {
-    LibraryCollection libraryCollection;
+public class BibliotecaLibraryApp {
+    Library library;
 
-    public BibliotecaLibrary(LibraryCollection libraryCollection){
-        this.libraryCollection = libraryCollection;
+    public BibliotecaLibraryApp(Library library){
+        this.library = library;
         System.out.println("Welcome");
     }
 
     public static void main(String[] args) {
-        LibraryCollection libraryCollection = getBookCollection();
-        new BibliotecaLibrary(libraryCollection).selectOption(System.in);
+        Library library = getBookCollection();
+        new BibliotecaLibraryApp(library).selectOption(System.in);
 
-        libraryCollection = getMovieCollection();
-        new BibliotecaLibrary(libraryCollection).selectOption(System.in);
+        library = getMovieCollection();
+        new BibliotecaLibraryApp(library).selectOption(System.in);
 
     }
 
@@ -41,15 +41,15 @@ public class BibliotecaLibrary {
         while(scanner.hasNext()) {
             option = Integer.parseInt(scanner.nextLine());
             Menu menu = Menu.getMenu(option);
-            if(!menu.executeMenu(scanner,libraryCollection))
+            if(!menu.executeMenu(scanner, library))
                 break;
             menuList();
         }
     }
 
-    private static LibraryCollection getMovieCollection() {
+    private static Library getMovieCollection() {
         ArrayList<Item> items;
-        LibraryCollection libraryCollection;Movie movie1 = new Movie("Krish3", 2012, "Rakesh Roshan", 3.2, false);
+        Library library;Movie movie1 = new Movie("Krish3", 2012, "Rakesh Roshan", 3.2, false);
         Movie movie2 = new Movie("Kaho Na Pyar Hai", 1999, "Rakesh R", 6.1, false);
 
         items = new ArrayList<Item>();
@@ -57,11 +57,11 @@ public class BibliotecaLibrary {
         items.add(movie1);
         items.add(movie2);
 
-        libraryCollection = new LibraryCollection(items);
-        return libraryCollection;
+        library = new Library(items);
+        return library;
     }
 
-    private static LibraryCollection getBookCollection() {
+    private static Library getBookCollection() {
         Book book1 = new Book("J K Rowling","Harry Potter",1992, false);
         Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
         ArrayList<Item> items = new ArrayList<Item>();
@@ -69,7 +69,7 @@ public class BibliotecaLibrary {
         items.add(book1);
         items.add(book2);
 
-        return new LibraryCollection(items);
+        return new Library(items);
     }
 
 }

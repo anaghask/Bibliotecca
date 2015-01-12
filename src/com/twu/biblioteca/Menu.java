@@ -1,80 +1,44 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public enum Menu {
     DISPLAY(1,"Display") {
         @Override
-        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
-            printStream.println("Author\t\tBook Name\t\tYear Of Publication");
-            for(Book book1 : listOfBook){
-                if (!book1.checkOutStatus)
-                    printStream.println(book1.toString());
-            }
-            return true;
+        public boolean executeMenu(Scanner scanner, Library library) {
+            return library.DisplayList();
         }
     },
 
-    CHECKOUT(2,"CheckOut Book") {
+    CHECKOUT(2,"CheckOut") {
         @Override
-        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
-            String bookName;
-            printStream.println("Enter book name for checkout");
-            boolean flag = false;
-            bookName = scanner.nextLine();
-            for (Book book : listOfBook){
-                if(book.bookName.compareToIgnoreCase(bookName) == 0 && !book.checkOutStatus){
-                    book.checkOutBook();
-                    printStream.println("Thank you! Enjoy the book");
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag){
-                    printStream.println("That book is not available.");
-            }
-            return true;
+        public boolean executeMenu(Scanner scanner, Library library) {
+            return library.checkOutItem(scanner);
         }
     },
 
-    RETURN(3,"Return Book") {
+    RETURN(3,"Return") {
         @Override
-        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
-            String bookName;
-            printStream.println("Enter book name for return");
-            bookName = scanner.nextLine();
-            boolean flag = false;
-            for (Book book : listOfBook){
-                if(book.bookName.compareToIgnoreCase(bookName) == 0 && book.checkOutStatus){
-                    printStream.println("Thank you for returning the book");
-                    book.returnBook();
-                    flag =true;
-                    break;
-                }
-            }
-            if(!flag){
-                printStream.println("That is not a valid book to return.");
-            }
-            return true;
+        public boolean executeMenu(Scanner scanner, Library library) {
+            return library.returnItem(scanner);
         }
     },
 
     QUIT(4,"Quit") {
         @Override
-        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
+        public boolean executeMenu(Scanner scanner, Library library) {
         return false;
         }
     },
 
     INVALID(5,"Invalid Option") {
         @Override
-        public boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook) {
-            printStream.println("Invalid Option");
+        public boolean executeMenu(Scanner scanner, Library library) {
+            System.out.println("Invalid Option");
             return true;
         }
     };
+
     public final int index;
     public String name;
 
@@ -94,11 +58,9 @@ public enum Menu {
             if(option == menu.index)
                 return menu;
         }
-        Menu invalid = Menu.INVALID;
-        return invalid;
+        return Menu.INVALID;
     }
 
-
-    public abstract boolean executeMenu(PrintStream printStream, Scanner scanner, ArrayList<Book> listOfBook);
+    public abstract boolean executeMenu(Scanner scanner, Library library);
 
 }
