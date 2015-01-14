@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class BookTest{
     @Test
     public void shouldGetBookInformation(){
-        assertEquals("J K\tHarry Potter\t1992", new Book("J K","Harry Potter",1992, false).toString());
+        assertEquals("J K\tHarry Potter\t1992\n", new Book("J K","Harry Potter",1992, false).toString());
     }
 
     @Test

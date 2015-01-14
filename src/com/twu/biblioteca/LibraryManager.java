@@ -17,7 +17,7 @@ public class LibraryManager {
 
     public void checkOut() {
         String itemName;
-        System.out.println("Enter book name for checkout");
+        printStream.println("Enter book name for checkout");
         itemName = scanner.nextLine();
         if(library.checkOutItem(itemName))
             printStream.println("Thank you! Enjoy the book");
@@ -28,9 +28,9 @@ public class LibraryManager {
     public void login(InputStream inputStream) {
         Scanner scanner = new Scanner(inputStream);
 
-        System.out.println("Enter Library Number:");
+        printStream.println("Enter Library Number:");
         String userName = scanner.nextLine();
-        System.out.println("Enter Password");
+        printStream.println("Enter Password");
         String password = scanner.nextLine();
 
         library.login(userName,password);
@@ -43,7 +43,7 @@ public class LibraryManager {
 
     public void returnItem() {
         String itemName;
-        System.out.println("Enter book name for return");
+        printStream.println("Enter book name for return");
         itemName = scanner.nextLine();
         if(library.returnItem(itemName))
             printStream.println("Thank you for returning the book");
@@ -52,6 +52,6 @@ public class LibraryManager {
     }
 
     public void display() {
-        printStream.println(library.DisplayList());
+        printStream.print(library.DisplayList());
     }
 }

@@ -45,7 +45,7 @@ public class LibraryManagerTest {
 
         libraryManager.checkOut();
 
-        assertEquals("Thank you! Enjoy the book\n", byteArrayOutputStream.toString());
+        assertEquals("Enter book name for checkout\nThank you! Enjoy the book\n", byteArrayOutputStream.toString());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class LibraryManagerTest {
 
         libraryManager.checkOut();
 
-        assertEquals("That book is not available.\n", byteArrayOutputStream.toString());
+        assertEquals("Enter book name for checkout\nThat book is not available.\n", byteArrayOutputStream.toString());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class LibraryManagerTest {
 
         libraryManager.checkOut();
 
-        assertEquals("That book is not available.\n",byteArrayOutputStream.toString());
+        assertEquals("Enter book name for checkout\nThat book is not available.\n",byteArrayOutputStream.toString());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class LibraryManagerTest {
 
         libraryManager.returnItem();
 
-        assertEquals("Thank you for returning the book\n", byteArrayOutputStream.toString());
+        assertEquals("Enter book name for return\nThank you for returning the book\n", byteArrayOutputStream.toString());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class LibraryManagerTest {
 
         libraryManager.returnItem();
 
-        assertEquals("That is not a valid book to return.\n", byteArrayOutputStream.toString());
+        assertEquals("Enter book name for return\nThat is not a valid book to return.\n", byteArrayOutputStream.toString());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class LibraryManagerTest {
 
         libraryManager.returnItem();
 
-        assertEquals("That is not a valid book to return.\n",byteArrayOutputStream.toString());
+        assertEquals("Enter book name for return\nThat is not a valid book to return.\n",byteArrayOutputStream.toString());
     }
 
     @Test

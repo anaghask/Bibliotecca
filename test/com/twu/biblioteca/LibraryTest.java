@@ -4,33 +4,56 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class LibraryTest{
 
+    private final ArrayList<Item> bookCollection;
+    private Library library;
+
+    public LibraryTest(){
+        bookCollection = getBookCollection();
+        library = new Library(bookCollection, getCustomerList());
+    }
+
     @Test
     public void shouldGetDisplayList() {
-
+        StringBuilder expectedOutput = new StringBuilder("Author\t\tBook Name\t\tYear Of Publication\n");
+        for(Item book :bookCollection){
+            expectedOutput.append(book.toString());
+        }
+        assertEquals(expectedOutput.toString(), library.DisplayList());
     }
 
     @Test
-    public void shouldReturnItem(){
-
+    public void shouldReturnItemIfValidNameIsProvided(){
+        assertFalse(library.returnItem("Harry Potter"));
     }
 
     @Test
-    public void shouldCheckOutItem() {
+    public void shouldNotReturnItemIfInValidNameIsProvided(){
+        assertFalse(library.returnItem("Harry Potter"));
+    }
 
+    @Test
+    public void shouldCheckOutItemIfValidItemNameIsProvided() {
+        assertTrue(library.checkOutItem("Harry Potter"));
+    }
 
+    @Test
+    public void shouldNotCheckOutItemIfInvalidItemNameIsProvided() {
+        bookCollection.add(new Book("J K","Harry",1992, true));
+        assertFalse(library.checkOutItem("Harry"));
     }
 
     @Test
     public void shouldLogin() {
 
-        Library library = new Library(getBookCollection(), getCustomerList());
         String userName="123-1234";
         String password ="password";
-        library.login(userName,password);
+        library.login(userName, password);
 
         assertTrue(library.isLoggedIn());
     }

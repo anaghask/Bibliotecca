@@ -10,7 +10,7 @@ public class Book extends Item{
 
     @Override
     public String toString() {
-        return  author+"\t"+name+"\t"+year ;
+        return  author+"\t"+name+"\t"+year+"\n" ;
     }
 
     @Override

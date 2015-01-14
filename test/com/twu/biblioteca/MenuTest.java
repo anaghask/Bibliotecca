@@ -1,9 +1,9 @@
 package com.twu.biblioteca;
 
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
@@ -31,12 +31,12 @@ public class MenuTest{
 
     @Test
     public void shouldBeAbleToDisplayInvalidInputOnWrongSelection() {
-        assertEquals(true, Menu.getMenu(-1).executeMenu(libraryManager));
+        TestCase.assertFalse(Menu.getMenu(-1).executeMenu(libraryManager));
     }
 
     @Test
     public void shouldBeAbleToQuitOnOptionSelection()  {
-        assertFalse(Menu.getMenu(4).executeMenu(libraryManager));
+        TestCase.assertTrue(Menu.getMenu(4).executeMenu(libraryManager));
     }
 
     @Test

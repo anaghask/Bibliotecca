@@ -28,15 +28,14 @@ public enum Menu {
     QUIT(4,"Quit") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-        return false;
+        return true;
         }
     },
 
     INVALID(5,"Invalid Option") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-            System.out.println("Invalid Option");
-            return true;
+            return false;
         }
     };
 

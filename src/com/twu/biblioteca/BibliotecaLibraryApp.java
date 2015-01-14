@@ -1,31 +1,36 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaLibraryApp {
+    private static PrintStream printStream;
     private final LibraryManager libraryManager;
 
-    public BibliotecaLibraryApp(LibraryManager libraryManager){
+    public BibliotecaLibraryApp(LibraryManager libraryManager, PrintStream printStream){
         this.libraryManager = libraryManager;
+        this.printStream = printStream;
         welcomeMessage();
     }
 
     private void welcomeMessage() {
-        System.out.println("Welcome");
+        printStream.println("Welcome");
     }
 
     public static void main(String[] args) {
         Library libraryBook = getBookCollection();
         Scanner scanner = new Scanner(System.in);
 
-        LibraryManager libraryManager = new LibraryManager(libraryBook, scanner, System.out);
-        new BibliotecaLibraryApp(libraryManager).selectOption(scanner);
 
+        LibraryManager libraryManager = new LibraryManager(libraryBook, scanner, System.out);
+        new BibliotecaLibraryApp(libraryManager,System.out).selectOption(scanner);
+
+        printStream.println("Movie Library");
         Library libraryMovie = getMovieCollection();
 
         libraryManager =new LibraryManager(libraryMovie, scanner, System.out);
-        new BibliotecaLibraryApp(libraryManager).selectOption(scanner);
+        new BibliotecaLibraryApp(libraryManager, printStream).selectOption(scanner);
 
     }
 
@@ -33,20 +38,19 @@ public class BibliotecaLibraryApp {
     private void menuList() {
         for (Menu menu :Menu.values()){
             if(!(menu == Menu.INVALID))
-                System.out.println(menu.toString());
+                printStream.println(menu.toString());
         }
+
     }
 
     public void selectOption(Scanner scanner){
-        menuList();
         int option;
-        while(scanner.hasNext()) {
-            option = Integer.parseInt(scanner.nextLine());
-            if(!Menu.getMenu(option).executeMenu(libraryManager))
-                break;
-            menuList();
-        }
-
+         do {
+             menuList();
+             option = Integer.parseInt(scanner.nextLine());
+             if(!Menu.getMenu(option).executeMenu(libraryManager))
+                printStream.println("Invalid Option");
+         }while (option!=4);
     }
 
     private static Library getMovieCollection() {
