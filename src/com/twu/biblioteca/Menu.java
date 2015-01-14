@@ -1,39 +1,40 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
-
 public enum Menu {
     DISPLAY(1,"Display") {
         @Override
-        public boolean executeMenu(Scanner scanner, Library library) {
-            return library.DisplayList();
+        public boolean executeMenu(LibraryManager libraryManager) {
+            libraryManager.display();
+            return true;
         }
     },
 
     CHECKOUT(2,"CheckOut") {
         @Override
-        public boolean executeMenu(Scanner scanner, Library library) {
-            return library.checkOutItem(scanner);
+        public boolean executeMenu(LibraryManager libraryManager) {
+            libraryManager.checkOut();
+            return true;
         }
     },
 
     RETURN(3,"Return") {
         @Override
-        public boolean executeMenu(Scanner scanner, Library library) {
-            return library.returnItem(scanner);
+        public boolean executeMenu(LibraryManager libraryManager) {
+            libraryManager.returnItem();
+            return true;
         }
     },
 
     QUIT(4,"Quit") {
         @Override
-        public boolean executeMenu(Scanner scanner, Library library) {
+        public boolean executeMenu(LibraryManager libraryManager) {
         return false;
         }
     },
 
     INVALID(5,"Invalid Option") {
         @Override
-        public boolean executeMenu(Scanner scanner, Library library) {
+        public boolean executeMenu(LibraryManager libraryManager) {
             System.out.println("Invalid Option");
             return true;
         }
@@ -61,6 +62,6 @@ public enum Menu {
         return Menu.INVALID;
     }
 
-    public abstract boolean executeMenu(Scanner scanner, Library library);
+    public abstract boolean executeMenu(LibraryManager libraryManager);
 
 }

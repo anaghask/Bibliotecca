@@ -1,23 +1,31 @@
 package com.twu.biblioteca;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaLibraryApp {
-    Library library;
+    private final LibraryManager libraryManager;
 
-    public BibliotecaLibraryApp(Library library){
-        this.library = library;
+    public BibliotecaLibraryApp(LibraryManager libraryManager){
+        this.libraryManager = libraryManager;
+        welcomeMessage();
+    }
+
+    private void welcomeMessage() {
         System.out.println("Welcome");
     }
 
     public static void main(String[] args) {
-        Library library = getBookCollection();
-        new BibliotecaLibraryApp(library).selectOption(System.in);
+        Library libraryBook = getBookCollection();
+        Scanner scanner = new Scanner(System.in);
 
-        library = getMovieCollection();
-        new BibliotecaLibraryApp(library).selectOption(System.in);
+        LibraryManager libraryManager = new LibraryManager(libraryBook, scanner, System.out);
+        new BibliotecaLibraryApp(libraryManager).selectOption(scanner);
+
+        Library libraryMovie = getMovieCollection();
+
+        libraryManager =new LibraryManager(libraryMovie, scanner, System.out);
+        new BibliotecaLibraryApp(libraryManager).selectOption(scanner);
 
     }
 
@@ -29,22 +37,16 @@ public class BibliotecaLibraryApp {
         }
     }
 
-    public void selectOption(InputStream inputStream){
-        Scanner scanner = new Scanner(inputStream);
+    public void selectOption(Scanner scanner){
         menuList();
-        executeMenu(scanner);
-
-    }
-
-    private void executeMenu(Scanner scanner) {
         int option;
         while(scanner.hasNext()) {
             option = Integer.parseInt(scanner.nextLine());
-            Menu menu = Menu.getMenu(option);
-            if(!menu.executeMenu(scanner, library))
+            if(!Menu.getMenu(option).executeMenu(libraryManager))
                 break;
             menuList();
         }
+
     }
 
     private static Library getMovieCollection() {
@@ -57,7 +59,7 @@ public class BibliotecaLibraryApp {
         items.add(movie1);
         items.add(movie2);
 
-        library = new Library(items);
+        library = new Library(items,getCustomerList() );
         return library;
     }
 
@@ -69,8 +71,21 @@ public class BibliotecaLibraryApp {
         items.add(book1);
         items.add(book2);
 
-        return new Library(items);
+        return new Library(items, getCustomerList());
     }
+
+    private static ArrayList<Customer> getCustomerList() {
+        Customer customer = new Customer("123-1234", "password");
+        Customer customer1 = new Customer("123-1235", "password1");
+        Customer customer2 = new Customer("123-1236", "password2");
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+
+        customers.add(customer);
+        customers.add(customer1);
+        customers.add(customer2);
+        return customers;
+    }
+
 
 }
 

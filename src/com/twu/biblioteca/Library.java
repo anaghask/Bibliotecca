@@ -1,61 +1,59 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Library {
     private final ArrayList<Item> listOfItem;
+    private final ArrayList<Customer> customers;
+    private boolean loggedIn;
 
-    public Library(ArrayList<Item> listOfItem) {
+    public Library(ArrayList<Item> listOfItem, ArrayList<Customer> customers) {
         this.listOfItem = listOfItem;
+        this.customers = customers;
     }
 
-    public boolean DisplayList() {
+    public String DisplayList() {
         Item itemHeader = listOfItem.get(listOfItem.size()-1);
-        System.out.println(itemHeader.returnHeader());
+        StringBuilder list = new StringBuilder(itemHeader.returnHeader()+"\n");
         for(Item item : listOfItem){
             if (!item.checkOutStatus)
-                System.out.println(item.toString());
+                list.append(item.toString());
         }
-        return true;
+        return list.toString();
     }
 
 
-    public boolean returnItem(Scanner scanner) {
-        String itemName;
-        System.out.println("Enter book name for return");
-        itemName = scanner.nextLine();
-        boolean flag = false;
+    public boolean returnItem(String itemName) {
         for (Item item : listOfItem){
             if(item.name.compareToIgnoreCase(itemName) == 0 && item.checkOutStatus){
-                System.out.println("Thank you for returning the book");
                 item.returnItem();
-                flag =true;
-                break;
+                return true;
             }
         }
-        if(!flag){
-            System.out.println("That is not a valid book to return.");
-        }
-        return true;
+        return false;
     }
 
-    public boolean checkOutItem(Scanner scanner) {
-        String itemName;
-        System.out.println("Enter book name for checkout");
-        boolean flag = false;
-        itemName = scanner.nextLine();
+    public boolean checkOutItem(String itemName) {
         for (Item item : listOfItem){
             if(item.name.compareToIgnoreCase(itemName) == 0 && !item.checkOutStatus){
                 item.checkOutItem();
-                System.out.println("Thank you! Enjoy the book");
-                flag = true;
-                break;
+                return true;
             }
         }
-        if (!flag){
-            System.out.println("That book is not available.");
-        }
-        return true;
+        return false;
     }
+
+    public void login(String userName, String password) {
+        for (Customer customer :customers){
+            if (customer.isValidLogin(userName, password)){
+                loggedIn =true;
+            }
+        }
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+
 }
