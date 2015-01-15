@@ -11,14 +11,8 @@ public class Library {
         this.customers = customers;
     }
 
-    public String DisplayList() {
-        Item itemHeader = listOfItem.get(listOfItem.size() - 1);
-        StringBuilder list = new StringBuilder(itemHeader.returnHeader() + "\n");
-        for (Item item : listOfItem) {
-            if (!item.checkOutStatus)
-                list.append(item.toString());
-        }
-        return list.toString();
+    public ArrayList<Item> getList() {
+        return listOfItem;
     }
 
 

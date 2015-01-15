@@ -24,11 +24,7 @@ public class LibraryTest {
 
     @Test
     public void shouldGetDisplayList() {
-        StringBuilder expectedOutput = new StringBuilder("Author\t\tBook Name\t\tYear Of Publication\n");
-        for (Item book : bookCollection) {
-            expectedOutput.append(book.toString());
-        }
-        assertEquals(expectedOutput.toString(), library.DisplayList());
+        assertEquals(bookCollection, library.getList());
     }
 
     @Test

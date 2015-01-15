@@ -12,8 +12,8 @@ class DummyMovieLibrary extends Library {
     }
 
     @Override
-    public String DisplayList() {
-        return "DisplayList";
+    public ArrayList<Item> getList() {
+        return getMovieCollection();
     }
 
     @Override
@@ -29,6 +29,13 @@ class DummyMovieLibrary extends Library {
     @Override
     public Customer isValidCustomer(String userName, String password) {
         return new Customer(userName, password, "Random", "xyz@gmail.com", "1234567891");
+    }
+
+    private ArrayList<Item> getMovieCollection() {
+        ArrayList<Item> items = new ArrayList<Item>();
+        Movie movie2 = new Movie("Kaho Na Pyar Hai", 1999, "Rakesh R", 6.1, false);
+        items.add(movie2);
+        return items;
     }
 
 }

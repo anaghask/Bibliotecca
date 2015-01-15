@@ -181,20 +181,48 @@ public class LibraryManagerTest {
     public void shouldDisplayBookList() {
         String inputForMenu = "Harry Potter\n";
         createLibraryManager(inputForMenu);
-
         libraryManager.displayBook();
+        String format = "%-30s%-30s%s\n";
 
-        assertEquals("DisplayList", byteArrayOutputStream.toString());
+        String expected =String.format(format,"Author","Book Name","Year Of Publication")+String.format(format,  "Harry Potter","J K Rowling", 1992);
+
+        assertEquals(expected, byteArrayOutputStream.toString());
+
     }
 
     @Test
     public void shouldDisplayMovieList() {
         String inputForMenu = "Harry Potter\n";
         createLibraryManager(inputForMenu);
-
         libraryManager.displayMovie();
+        String format = "%-30s%-30s%-30s%s\n";
 
-        assertEquals("DisplayList", byteArrayOutputStream.toString());
+        String expected =String.format(format,"Movie Name","Year Of Release","Director Name","Movie Rating")+String.format(format,"Kaho Na Pyar Hai", 1999, "Rakesh R", 6.1);
+
+        assertEquals(expected, byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldDisplayCustomerList() {
+        String inputForMenu = validUserName +"Harry Potter\n";
+        createLibraryManager(inputForMenu);
+        libraryManager.checkOutMovie();
+        libraryManager.displayCurrentCustomer();
+        String format = "%-30s%-30s%s\n";
+
+        StringBuilder list = new StringBuilder(String.format(format,"name","email","phone"));
+        list.append(String.format(format,"Random", "xyz@gmail.com", "1234567891"));
+
+        assertEquals(loginMessage + unsuccessfulMovieCheckOut+list.toString(), byteArrayOutputStream.toString());
+    }
+
+    @Test
+    public void shouldNotDisplayCustomerListWhenCustomerIsNotLoggedIn() {
+        String inputForMenu = validUserName +"Harry Potter\n";
+        createLibraryManager(inputForMenu);
+        libraryManager.displayCurrentCustomer();
+
+        assertEquals("", byteArrayOutputStream.toString());
     }
 
 }

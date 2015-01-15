@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 public class Book extends Item {
-    private final String author;
+    public final String author;
 
     public Book(String author, String bookName, int yearPublished, boolean checkOut) {
         super(checkOut, yearPublished, bookName);
@@ -9,13 +9,9 @@ public class Book extends Item {
     }
 
     @Override
-    public String toString() {
-        return author + "\t" + name + "\t" + year + "\n";
-    }
+    public String[] returnHeader() {
 
-    @Override
-    public String returnHeader() {
-        return "Author\t\tBook Name\t\tYear Of Publication";
+        return new String[]{"Author","Book Name","Year Of Publication"};
     }
 
 

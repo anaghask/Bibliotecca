@@ -67,7 +67,7 @@ public class BibliotecaLibraryApp {
 
     private void menuList() {
         for (Menu menu : Menu.values()) {
-            if (!(menu == Menu.INVALID)) {
+            if (!(menu == null)) {
                 if (!libraryManager.isLoggedIn() && menu == Menu.DISPLAYCUSTOMERINFO)
                     break;
                 printStream.println(menu.toString());
@@ -81,8 +81,13 @@ public class BibliotecaLibraryApp {
         do {
             menuList();
             option = Integer.parseInt(scanner.nextLine());
-            if (!Menu.getMenu(option).executeMenu(libraryManager))
+            Menu menu = Menu.getMenu(option);
+            if(menu == null || (!libraryManager.isLoggedIn() && menu == Menu.DISPLAYCUSTOMERINFO))
                 printStream.println("Invalid Option");
+            else
+                menu.executeMenu(libraryManager);
+
+
         } while (option != Menu.QUIT.index);
     }
 

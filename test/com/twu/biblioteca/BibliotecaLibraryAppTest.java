@@ -77,8 +77,7 @@ public class BibliotecaLibraryAppTest {
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
-        String expected = welComeString + menuString;
-        assertEquals(expected, byteArrayOutputStream.toString());
+        assertEquals(welComeString+menuString, byteArrayOutputStream.toString());
     }
 
     private Scanner getScanner(String inputForMenu) {

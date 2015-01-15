@@ -13,8 +13,8 @@ class DummyBookLibrary extends Library {
     }
 
     @Override
-    public String DisplayList() {
-        return "DisplayList";
+    public ArrayList<Item> getList() {
+        return getBookCollection();
     }
 
     @Override
@@ -30,6 +30,13 @@ class DummyBookLibrary extends Library {
     @Override
     public Customer isValidCustomer(String userName, String password) {
         return new Customer(userName, password, "Random", "xyz@gmail.com", "1234567891");
+    }
+
+    private ArrayList<Item> getBookCollection() {
+        Book validCheckOutBook = new Book("J K Rowling", "Harry Potter", 1992, false);
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(validCheckOutBook);
+        return items;
     }
 }
 

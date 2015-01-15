@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LibraryManager {
@@ -47,17 +48,13 @@ public class LibraryManager {
 
     private boolean checkEligibilityForItemToBeCheckedOut(Library library, String itemName) {
         Item item = library.Find(itemName);
-        if (item != null && library.checkOutItem(item))
-            return true;
-        return false;
+        return item != null && library.checkOutItem(item);
     }
 
     private boolean checkEligibilityForItemToBeReturned(Library library, String itemName) {
         Item item = library.Find(itemName);
-        if (item != null && library.returnItem(item))
-            return true;
+        return item != null && library.returnItem(item);
 
-        return false;
     }
 
     private boolean login(Library library) {
@@ -67,10 +64,7 @@ public class LibraryManager {
         String password = scanner.nextLine();
 
         customer = library.isValidCustomer(userName, password);
-        if (customer == null)
-            return false;
-
-        return true;
+        return customer != null;
 
     }
 
@@ -93,21 +87,47 @@ public class LibraryManager {
     }
 
     public boolean isLoggedIn(){
-        if (customer == null){
-            return false;
-        }
-        return true;
+        return customer != null;
     }
 
-    public void displayBook() {
-        printStream.print(library.DisplayList());
+    public void displayBook()
+    {
+        ArrayList<Item> bookList = library.getList();
+        Item itemHeader = bookList.get(bookList.size() - 1);
+        String []headerList = itemHeader.returnHeader();
+        String format = "%-30s%-30s%s\n";
+        StringBuilder list = new StringBuilder(String.format(format,headerList));
+        for (Item item : bookList) {
+            if (!item.checkOutStatus) {
+                Book book = (Book) item;
+               list.append(String.format(format, book.name, book.author, book.year));
+            }
+        }
+        printStream.print(list.toString());
     }
 
     public void displayMovie() {
-        printStream.print(movieLibrary.DisplayList());
+        ArrayList<Item> movieList = movieLibrary.getList();
+        Item itemHeader = movieList.get(movieList.size() - 1);
+        String []headerList = itemHeader.returnHeader();
+        String format = "%-30s%-30s%-30s%s\n";
+        StringBuilder list = new StringBuilder(String.format(format,headerList));
+        for (Item item : movieList) {
+            if (!item.checkOutStatus) {
+                Movie movie = (Movie) item;
+                list.append(String.format(format,movie.name, movie.year,movie.directorName,movie.movieRating));
+            }
+        }
+
+        printStream.print(list);
     }
 
     public void displayCurrentCustomer() {
-        printStream.println(customer.toString());
+        String format = "%-30s%-30s%s\n";
+        if(isLoggedIn()) {
+            StringBuilder list = new StringBuilder(String.format(format, "name", "email", "phone"));
+            list.append(String.format(format, customer.name, customer.email, customer.phone));
+            printStream.print(list.toString());
+        }
     }
 }
