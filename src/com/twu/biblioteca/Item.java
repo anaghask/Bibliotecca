@@ -18,6 +18,7 @@ public abstract class Item {
     public abstract String toString();
 
     public abstract String returnHeader();
+
     public void returnItem() {
         this.checkOutStatus = false;
     }

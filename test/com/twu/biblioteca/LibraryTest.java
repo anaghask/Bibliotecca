@@ -4,18 +4,22 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LibraryTest{
 
     private final ArrayList<Item> bookCollection;
     private Library library;
+    private Book validCheckOutBook;
+    private Book book1;
+    private Book invalidBook;
+    private Book validReturnableBook;
 
     public LibraryTest(){
         bookCollection = getBookCollection();
         library = new Library(bookCollection, getCustomerList());
+        invalidBook = new Book("Dan", "Angels", 1245, false);
+
     }
 
     @Test
@@ -28,43 +32,60 @@ public class LibraryTest{
     }
 
     @Test
-    public void shouldReturnItemIfValidNameIsProvided(){
-        assertFalse(library.returnItem("Harry Potter"));
+    public void shouldSuccessfullyReturnItemIfValidItemIsProvided()
+    {
+        assertTrue(library.returnItem(validReturnableBook));
     }
 
     @Test
-    public void shouldNotReturnItemIfInValidNameIsProvided(){
-        assertFalse(library.returnItem("Harry Potter"));
+    public void shouldNotReturnItemIfInValidItemIsProvided(){
+
+        assertFalse(library.returnItem(this.invalidBook));
     }
 
     @Test
     public void shouldCheckOutItemIfValidItemNameIsProvided() {
-        assertTrue(library.checkOutItem("Harry Potter"));
+
+        assertTrue(library.checkOutItem(validCheckOutBook));
     }
 
     @Test
     public void shouldNotCheckOutItemIfInvalidItemNameIsProvided() {
-        bookCollection.add(new Book("J K","Harry",1992, true));
-        assertFalse(library.checkOutItem("Harry"));
+        assertFalse(library.checkOutItem(validReturnableBook));
     }
 
     @Test
-    public void shouldLogin() {
+    public void shouldBeAbleToFindItemOnValidItemName(){
+      assertEquals(book1,library.Find("Angels and Demons"));
+    }
 
+    @Test
+    public void shouldReturnNullOnInvalidItemName(){
+      assertEquals(null,library.Find("Angels"));
+    }
+
+    @Test
+    public void shouldBeAbleToValidateLogin() {
         String userName="123-1234";
         String password ="password";
-        library.login(userName, password);
+        assertNotEquals(null, library.isValidCustomer(userName, password));
+    }
 
-        assertTrue(library.isLoggedIn());
+    @Test
+    public void shouldNotValidateLoginIfUsernameIsWrong() {
+        String userName="123-123";
+        String password ="password";
+        assertEquals(null, library.isValidCustomer(userName, password));
     }
 
     private ArrayList<Item> getBookCollection() {
-        Book book1 = new Book("J K Rowling","Harry Potter",1992, false);
-        Book book2 = new Book("Dan Brown","Angels and Demons",1245, false);
+        validCheckOutBook = new Book("J K Rowling", "Harry Potter", 1992, false);
+        book1 = new Book("Dan Brown", "Angels and Demons", 1245, false);
+        validReturnableBook = new Book("Dan ", "Attend", 1245, true);
         ArrayList<Item> items = new ArrayList<Item>();
 
+        items.add(validCheckOutBook);
         items.add(book1);
-        items.add(book2);
 
         return items;
     }

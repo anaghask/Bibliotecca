@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Library {
     private final ArrayList<Item> listOfItem;
     private final ArrayList<Customer> customers;
-    private boolean loggedIn;
 
     public Library(ArrayList<Item> listOfItem, ArrayList<Customer> customers) {
         this.listOfItem = listOfItem;
@@ -23,37 +22,40 @@ public class Library {
     }
 
 
-    public boolean returnItem(String itemName) {
-        for (Item item : listOfItem){
-            if(item.name.compareToIgnoreCase(itemName) == 0 && item.checkOutStatus){
+    public boolean returnItem(Item item) {
+            if(item.checkOutStatus){
                 item.returnItem();
                 return true;
             }
-        }
         return false;
     }
 
-    public boolean checkOutItem(String itemName) {
-        for (Item item : listOfItem){
-            if(item.name.compareToIgnoreCase(itemName) == 0 && !item.checkOutStatus){
+    public boolean checkOutItem(Item item) {
+            if(!item.checkOutStatus){
                 item.checkOutItem();
                 return true;
             }
-        }
         return false;
     }
 
-    public void login(String userName, String password) {
-        for (Customer customer :customers){
-            if (customer.isValidLogin(userName, password)){
-                loggedIn =true;
+    public Item Find(String itemName){
+        for (Item item : listOfItem){
+            if(item.name.compareToIgnoreCase(itemName) == 0){
+                return item;
             }
         }
+        return null;
+
+    }
+    public Customer isValidCustomer(String userName, String password) {
+        for (Customer customer :customers){
+            if (customer.isValidLogin(userName, password)){
+                return customer;
+            }
+        }
+        return null;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
 
 
 }

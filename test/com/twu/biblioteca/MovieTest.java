@@ -8,7 +8,7 @@ public class MovieTest {
 
     @Test
     public void shouldGetBookInformation(){
-        assertEquals("Harry Potter\t1992\tRandom\t6.1", new Movie("Harry Potter",1992,"Random",6.1,false).toString());
+        assertEquals("Harry Potter\t1992\tRandom\t6.1\n", new Movie("Harry Potter",1992,"Random",6.1,false).toString());
     }
 
     @Test

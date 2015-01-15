@@ -21,6 +21,11 @@ public class CustomerTest {
         assertTrue(new Customer("123-1234","password").isValidLogin("123-1234", "password"));
     }
 
+    @Test
+    public void shouldNotValidateWrongCustomerCredentials(){
+        assertFalse(new Customer("123-1234","password").isValidLogin("123-1234", "passwor"));
+    }
+
 
 
 }

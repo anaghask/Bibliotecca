@@ -18,7 +18,13 @@ public class BibliotecaLibraryAppTest {
     private BibliotecaLibraryApp bibliotecaLibraryApp;
     private String inputForMenu;
     private String welComeString ="Welcome\n";
-    private String menuString ="1:Display\n2:CheckOut\n3:Return\n4:Quit\n";
+    private String menuString ="1:Display Books\n" +
+            "2:Display Movie\n" +
+            "3:CheckOut Book\n" +
+            "4:CheckOut Movie\n" +
+            "5:Return Book\n" +
+            "6:Return Movie\n" +
+            "7:Quit\n";
 
 
     public BibliotecaLibraryAppTest() {
@@ -29,7 +35,7 @@ public class BibliotecaLibraryAppTest {
 
     @Test
     public void shouldBeAbleToSelectDisplayFromMenu() {
-        inputForMenu = "1\n4\n";
+        inputForMenu = "1\n7\n";
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
@@ -38,7 +44,7 @@ public class BibliotecaLibraryAppTest {
 
     @Test
     public void shouldBeAbleToSelectCheckOutFromMenu() {
-        inputForMenu = "2\n4\n";
+        inputForMenu = "3\n7\n";
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
@@ -47,7 +53,7 @@ public class BibliotecaLibraryAppTest {
 
     @Test
     public void shouldBeAbleToSelectReturnFromMenu() {
-        inputForMenu = "3\n4\n";
+        inputForMenu = "5\n7\n";
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
@@ -56,7 +62,7 @@ public class BibliotecaLibraryAppTest {
 
     @Test
     public void shouldNotBeAbleToSelectWrongOptionFromMenu() {
-        inputForMenu = "8\n4\n";
+        inputForMenu = "8\n7\n";
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
@@ -67,7 +73,7 @@ public class BibliotecaLibraryAppTest {
 
     @Test
     public void shouldBeAbleQuitOnMenuSelection() {
-        String inputForMenu = "4\n";
+        String inputForMenu = "7\n";
 
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 

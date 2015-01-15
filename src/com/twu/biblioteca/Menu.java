@@ -1,38 +1,60 @@
 package com.twu.biblioteca;
 
 public enum Menu {
-    DISPLAY(1,"Display") {
+    DISPLAYBOOK(1,"Display Books") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-            libraryManager.display();
+            libraryManager.displayBook();
+            return true;
+        }
+    },
+    DISPLAYMOVIE(2,"Display Movie") {
+        @Override
+        public boolean executeMenu(LibraryManager libraryManager) {
+            libraryManager.displayMovie();
             return true;
         }
     },
 
-    CHECKOUT(2,"CheckOut") {
+    CHECKOUTBOOK(3,"CheckOut Book") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-            libraryManager.checkOut();
+            libraryManager.checkOutBook();
+            return true;
+        }
+    },
+    CHECKOUTMOVIE(4,"CheckOut Movie") {
+        @Override
+        public boolean executeMenu(LibraryManager libraryManager) {
+            libraryManager.checkOutMovie();
             return true;
         }
     },
 
-    RETURN(3,"Return") {
+    RETURNBOOK(5,"Return Book") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-            libraryManager.returnItem();
+            libraryManager.returnBook();
             return true;
         }
     },
 
-    QUIT(4,"Quit") {
+    RETURNMOVIE(6,"Return Movie") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
-        return true;
+            libraryManager.returnMovie();
+            return true;
         }
     },
 
-    INVALID(5,"Invalid Option") {
+    QUIT(7,"Quit") {
+        @Override
+        public boolean executeMenu(LibraryManager libraryManager) {
+            return true;
+        }
+    },
+
+    INVALID(8,"Invalid Option") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             return false;

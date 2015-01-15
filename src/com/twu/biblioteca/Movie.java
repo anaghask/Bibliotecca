@@ -12,7 +12,7 @@ public class Movie extends Item{
 
     @Override
     public String toString() {
-        return name + '\t' + year +'\t'+ directorName + '\t'+ movieRating ;
+        return name + '\t' + year +'\t'+ directorName + '\t'+ movieRating +'\n';
     }
 
     @Override

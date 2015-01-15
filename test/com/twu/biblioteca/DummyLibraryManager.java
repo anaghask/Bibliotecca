@@ -11,26 +11,42 @@ public class DummyLibraryManager extends LibraryManager{
         public boolean displayFlag;
 
         public DummyLibraryManager(){
-            this(new Library(new ArrayList<Item>(),new ArrayList<Customer>()),new Scanner(System.in),System.out);
+            this(new Library(new ArrayList<Item>(),new ArrayList<Customer>()),new Library(new ArrayList<Item>(),new ArrayList<Customer>()),new Scanner(System.in),System.out);
         }
-        public DummyLibraryManager(Library library, Scanner scanner, PrintStream printStream) {
-            super(library, scanner, printStream);
+        public DummyLibraryManager(Library library,Library movieLibrary, Scanner scanner, PrintStream printStream) {
+            super(library, movieLibrary, scanner, printStream);
             flag =false;
         }
 
-        @Override
-        public void checkOut() {
-            checkOutFlag = true;
-        }
+    @Override
+    public void checkOutMovie() {
+        this.checkOutFlag =true;
+    }
 
-        @Override
-        public void returnItem() {
-            returnItem = true;
-        }
+    @Override
+    public void checkOutBook() {
+        this.checkOutFlag =true;
 
-        @Override
-        public void display() {
-            displayFlag = true;
-        }
+    }
+
+    @Override
+    public void returnBook() {
+        this.returnItem =true;
+    }
+
+    @Override
+    public void returnMovie() {
+        this.returnItem =true;
+    }
+
+    @Override
+    public void displayBook() {
+        this.displayFlag =true;
+    }
+
+    @Override
+    public void displayMovie() {
+        this.displayFlag =true;
+    }
 }
 

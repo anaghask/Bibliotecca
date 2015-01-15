@@ -20,18 +20,11 @@ public class BibliotecaLibraryApp {
 
     public static void main(String[] args) {
         Library libraryBook = getBookCollection();
+        Library libraryMovie = getMovieCollection();
         Scanner scanner = new Scanner(System.in);
 
-
-        LibraryManager libraryManager = new LibraryManager(libraryBook, scanner, System.out);
+        LibraryManager libraryManager = new LibraryManager(libraryBook,libraryMovie , scanner, System.out);
         new BibliotecaLibraryApp(libraryManager,System.out).selectOption(scanner);
-
-        printStream.println("Movie Library");
-        Library libraryMovie = getMovieCollection();
-
-        libraryManager =new LibraryManager(libraryMovie, scanner, System.out);
-        new BibliotecaLibraryApp(libraryManager, printStream).selectOption(scanner);
-
     }
 
 
@@ -40,7 +33,6 @@ public class BibliotecaLibraryApp {
             if(!(menu == Menu.INVALID))
                 printStream.println(menu.toString());
         }
-
     }
 
     public void selectOption(Scanner scanner){
@@ -50,7 +42,7 @@ public class BibliotecaLibraryApp {
              option = Integer.parseInt(scanner.nextLine());
              if(!Menu.getMenu(option).executeMenu(libraryManager))
                 printStream.println("Invalid Option");
-         }while (option!=4);
+         }while (option!=Menu.QUIT.index);
     }
 
     private static Library getMovieCollection() {
