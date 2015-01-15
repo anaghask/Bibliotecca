@@ -1,14 +1,14 @@
 package com.twu.biblioteca;
 
 public enum Menu {
-    DISPLAYBOOK(1,"Display Books") {
+    DISPLAYBOOK(1, "Display Books") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.displayBook();
             return true;
         }
     },
-    DISPLAYMOVIE(2,"Display Movie") {
+    DISPLAYMOVIE(2, "Display Movie") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.displayMovie();
@@ -16,14 +16,14 @@ public enum Menu {
         }
     },
 
-    CHECKOUTBOOK(3,"CheckOut Book") {
+    CHECKOUTBOOK(3, "CheckOut Book") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.checkOutBook();
             return true;
         }
     },
-    CHECKOUTMOVIE(4,"CheckOut Movie") {
+    CHECKOUTMOVIE(4, "CheckOut Movie") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.checkOutMovie();
@@ -31,7 +31,7 @@ public enum Menu {
         }
     },
 
-    RETURNBOOK(5,"Return Book") {
+    RETURNBOOK(5, "Return Book") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.returnBook();
@@ -39,7 +39,7 @@ public enum Menu {
         }
     },
 
-    RETURNMOVIE(6,"Return Movie") {
+    RETURNMOVIE(6, "Return Movie") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             libraryManager.returnMovie();
@@ -47,14 +47,25 @@ public enum Menu {
         }
     },
 
-    QUIT(7,"Quit") {
+    QUIT(7, "Quit") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             return true;
         }
     },
 
-    INVALID(8,"Invalid Option") {
+    DISPLAYCUSTOMERINFO(8, "Display User Information") {
+        @Override
+        public boolean executeMenu(LibraryManager libraryManager) {
+            if(libraryManager.isLoggedIn())
+            {
+                libraryManager.displayCurrentCustomer();
+                return true;
+            }
+            return false;
+        }
+    },
+    INVALID(9, "Invalid Option") {
         @Override
         public boolean executeMenu(LibraryManager libraryManager) {
             return false;
@@ -69,18 +80,18 @@ public enum Menu {
         this.name = name;
     }
 
+    public static Menu getMenu(int option) {
+        for (Menu menu : Menu.values()) {
+            if (option == menu.index)
+                return menu;
+        }
+        return Menu.INVALID;
+    }
+
 
     @Override
     public String toString() {
         return index + ":" + name;
-    }
-
-    public static Menu getMenu(int option) {
-        for (Menu menu :Menu.values()){
-            if(option == menu.index)
-                return menu;
-        }
-        return Menu.INVALID;
     }
 
     public abstract boolean executeMenu(LibraryManager libraryManager);

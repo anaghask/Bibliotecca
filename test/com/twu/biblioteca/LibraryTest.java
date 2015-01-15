@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class LibraryTest{
+public class LibraryTest {
 
     private final ArrayList<Item> bookCollection;
     private Library library;
@@ -15,7 +15,7 @@ public class LibraryTest{
     private Book invalidBook;
     private Book validReturnableBook;
 
-    public LibraryTest(){
+    public LibraryTest() {
         bookCollection = getBookCollection();
         library = new Library(bookCollection, getCustomerList());
         invalidBook = new Book("Dan", "Angels", 1245, false);
@@ -25,20 +25,19 @@ public class LibraryTest{
     @Test
     public void shouldGetDisplayList() {
         StringBuilder expectedOutput = new StringBuilder("Author\t\tBook Name\t\tYear Of Publication\n");
-        for(Item book :bookCollection){
+        for (Item book : bookCollection) {
             expectedOutput.append(book.toString());
         }
         assertEquals(expectedOutput.toString(), library.DisplayList());
     }
 
     @Test
-    public void shouldSuccessfullyReturnItemIfValidItemIsProvided()
-    {
+    public void shouldSuccessfullyReturnItemIfValidItemIsProvided() {
         assertTrue(library.returnItem(validReturnableBook));
     }
 
     @Test
-    public void shouldNotReturnItemIfInValidItemIsProvided(){
+    public void shouldNotReturnItemIfInValidItemIsProvided() {
 
         assertFalse(library.returnItem(this.invalidBook));
     }
@@ -55,26 +54,26 @@ public class LibraryTest{
     }
 
     @Test
-    public void shouldBeAbleToFindItemOnValidItemName(){
-      assertEquals(book1,library.Find("Angels and Demons"));
+    public void shouldBeAbleToFindItemOnValidItemName() {
+        assertEquals(book1, library.Find("Angels and Demons"));
     }
 
     @Test
-    public void shouldReturnNullOnInvalidItemName(){
-      assertEquals(null,library.Find("Angels"));
+    public void shouldReturnNullOnInvalidItemName() {
+        assertEquals(null, library.Find("Angels"));
     }
 
     @Test
     public void shouldBeAbleToValidateLogin() {
-        String userName="123-1234";
-        String password ="password";
+        String userName = "123-1234";
+        String password = "password";
         assertNotEquals(null, library.isValidCustomer(userName, password));
     }
 
     @Test
     public void shouldNotValidateLoginIfUsernameIsWrong() {
-        String userName="123-123";
-        String password ="password";
+        String userName = "123-123";
+        String password = "password";
         assertEquals(null, library.isValidCustomer(userName, password));
     }
 
@@ -91,9 +90,9 @@ public class LibraryTest{
     }
 
     private ArrayList<Customer> getCustomerList() {
-        Customer customer = new Customer("123-1234", "password");
-        Customer customer1 = new Customer("123-1235", "password1");
-        Customer customer2 = new Customer("123-1236", "password2");
+        Customer customer = new Customer("123-1234", "password", "Random", "xyz@gmail.com", "1234567891");
+        Customer customer1 = new Customer("123-1235", "password1", "Random", "xyz@gmail.com", "1234567891");
+        Customer customer2 = new Customer("123-1236", "password2", "Random", "xyz@gmail.com", "1234567891");
         ArrayList<Customer> customers = new ArrayList<Customer>();
 
         customers.add(customer);

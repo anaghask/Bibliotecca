@@ -21,16 +21,15 @@ class DummyBookLibrary extends Library {
     public Item Find(String itemName) {
         if (itemName.equals("valid return"))
             return new Book("xyz", "valid", 1234, true);
+        else if (itemName.equals("valid checkout"))
+            return new Book("xyz", "valid", 1234, false);
         else
-            if (itemName.equals("valid checkout"))
-                return new Book("xyz", "valid", 1234, false);
-            else
-                return null;
+            return null;
     }
 
     @Override
     public Customer isValidCustomer(String userName, String password) {
-        return new Customer(userName,password);
+        return new Customer(userName, password, "Random", "xyz@gmail.com", "1234567891");
     }
 }
 

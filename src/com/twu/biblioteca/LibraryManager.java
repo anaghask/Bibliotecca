@@ -20,7 +20,7 @@ public class LibraryManager {
     public void checkOutMovie() {
         if (!loginSuccess(movieLibrary)) return;
         printStream.println("Enter movie name for checkout");
-        if(checkEligibilityForItemToBeCheckedOut(movieLibrary,scanner.nextLine()))
+        if (checkEligibilityForItemToBeCheckedOut(movieLibrary, scanner.nextLine()))
             printStream.println("Thank you! Enjoy the movie");
         else
             printStream.println("That movie is not available.");
@@ -29,7 +29,7 @@ public class LibraryManager {
     public void checkOutBook() {
         if (!loginSuccess(library)) return;
         printStream.println("Enter book name for checkout");
-        if(checkEligibilityForItemToBeCheckedOut(library,scanner.nextLine()))
+        if (checkEligibilityForItemToBeCheckedOut(library, scanner.nextLine()))
             printStream.println("Thank you! Enjoy the book");
         else
             printStream.println("That book is not available.");
@@ -37,7 +37,7 @@ public class LibraryManager {
     }
 
     private boolean loginSuccess(Library library) {
-        if(customer == null )
+        if (customer == null)
             if (!login(library)) {
                 printStream.println("Invalid Login");
                 return false;
@@ -45,16 +45,17 @@ public class LibraryManager {
         return true;
     }
 
-    private boolean checkEligibilityForItemToBeCheckedOut(Library library, String itemName){
+    private boolean checkEligibilityForItemToBeCheckedOut(Library library, String itemName) {
         Item item = library.Find(itemName);
-        if(item!=null && library.checkOutItem(item))
-                return true;
+        if (item != null && library.checkOutItem(item))
+            return true;
         return false;
     }
-    private boolean checkEligibilityForItemToBeReturned(Library library, String itemName){
+
+    private boolean checkEligibilityForItemToBeReturned(Library library, String itemName) {
         Item item = library.Find(itemName);
-        if(item!=null && library.returnItem(item))
-                return true;
+        if (item != null && library.returnItem(item))
+            return true;
 
         return false;
     }
@@ -66,8 +67,9 @@ public class LibraryManager {
         String password = scanner.nextLine();
 
         customer = library.isValidCustomer(userName, password);
-        if (customer==null)
+        if (customer == null)
             return false;
+
         return true;
 
     }
@@ -75,7 +77,7 @@ public class LibraryManager {
     public void returnBook() {
         if (!loginSuccess(library)) return;
         printStream.println("Enter book name for return");
-        if(checkEligibilityForItemToBeReturned(this.library , scanner.nextLine()))
+        if (checkEligibilityForItemToBeReturned(this.library, scanner.nextLine()))
             printStream.println("Thank you for returning the book");
         else
             printStream.println("That is not a valid book to return.");
@@ -84,16 +86,28 @@ public class LibraryManager {
     public void returnMovie() {
         if (!loginSuccess(movieLibrary)) return;
         printStream.println("Enter movie name for return");
-        if(checkEligibilityForItemToBeReturned(this.movieLibrary, scanner.nextLine()))
+        if (checkEligibilityForItemToBeReturned(this.movieLibrary, scanner.nextLine()))
             printStream.println("Thank you for returning the movie");
         else
             printStream.println("That is not a valid movie to return.");
     }
 
+    public boolean isLoggedIn(){
+        if (customer == null){
+            return false;
+        }
+        return true;
+    }
+
     public void displayBook() {
         printStream.print(library.DisplayList());
     }
+
     public void displayMovie() {
         printStream.print(movieLibrary.DisplayList());
+    }
+
+    public void displayCurrentCustomer() {
+        printStream.println(customer.toString());
     }
 }

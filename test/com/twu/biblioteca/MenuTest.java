@@ -8,30 +8,30 @@ import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 
-public class MenuTest{
+public class MenuTest {
 
-    private DummyLibraryManager libraryManager =new DummyLibraryManager();
+    private DummyLibraryManager libraryManager = new DummyLibraryManager();
 
     @After
-    public void resetFlagOfDummyObject(){
+    public void resetFlagOfDummyObject() {
         libraryManager.checkOutFlag = false;
         libraryManager.displayFlag = false;
         libraryManager.returnItem = false;
     }
 
     @Test
-    public void shouldReturnProperMenu(){
+    public void shouldReturnProperMenu() {
         assertEquals(Menu.getMenu(1), Menu.DISPLAYBOOK);
     }
 
     @Test
-    public void shouldDisplayBookList(){
+    public void shouldDisplayBookList() {
         assertTrue(Menu.getMenu(1).executeMenu(libraryManager));
         assertTrue(libraryManager.displayFlag);
     }
 
     @Test
-    public void shouldDisplayMenuList(){
+    public void shouldDisplayMenuList() {
         assertTrue(Menu.getMenu(2).executeMenu(libraryManager));
         assertTrue(libraryManager.displayFlag);
     }
@@ -42,42 +42,42 @@ public class MenuTest{
     }
 
     @Test
-    public void shouldBeAbleToQuitOnOptionSelection()  {
+    public void shouldBeAbleToQuitOnOptionSelection() {
         assertTrue(Menu.getMenu(7).executeMenu(libraryManager));
     }
 
     @Test
-    public void shouldBeAbleToCheckoutBook()  {
+    public void shouldBeAbleToCheckoutBook() {
         assertTrue(Menu.getMenu(3).executeMenu(libraryManager));
         assertTrue(libraryManager.checkOutFlag);
     }
 
     @Test
-    public void shouldBeAbleToCheckoutMovie()  {
+    public void shouldBeAbleToCheckoutMovie() {
         assertTrue(Menu.getMenu(4).executeMenu(libraryManager));
         assertTrue(libraryManager.checkOutFlag);
     }
 
     @Test
-    public void shouldNotBeAbleToCheckoutBookOnInvalidInput()  {
+    public void shouldNotBeAbleToCheckoutBookOnInvalidInput() {
         assertTrue(Menu.getMenu(3).executeMenu(libraryManager));
         assertTrue(libraryManager.checkOutFlag);
     }
 
     @Test
-    public void shouldBeAbleToReturnBookOnValidInput()  {
+    public void shouldBeAbleToReturnBookOnValidInput() {
         assertTrue(Menu.getMenu(5).executeMenu(libraryManager));
         assertTrue(libraryManager.returnItem);
     }
 
     @Test
-    public void shouldBeAbleToReturnMovieOnValidInput()  {
+    public void shouldBeAbleToReturnMovieOnValidInput() {
         assertTrue(Menu.getMenu(6).executeMenu(libraryManager));
         assertTrue(libraryManager.returnItem);
     }
 
     @Test
-    public void shouldNotBeAbleToReturnBookOnInValidInput()  {
+    public void shouldNotBeAbleToReturnBookOnInValidInput() {
         assertTrue(Menu.getMenu(5).executeMenu(libraryManager));
         assertTrue(libraryManager.returnItem);
     }

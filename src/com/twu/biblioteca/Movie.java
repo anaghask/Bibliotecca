@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Movie extends Item{
+public class Movie extends Item {
     private final String directorName;
     private final double movieRating;
 
@@ -12,7 +12,7 @@ public class Movie extends Item{
 
     @Override
     public String toString() {
-        return name + '\t' + year +'\t'+ directorName + '\t'+ movieRating +'\n';
+        return name + '\t' + year + '\t' + directorName + '\t' + movieRating + '\n';
     }
 
     @Override

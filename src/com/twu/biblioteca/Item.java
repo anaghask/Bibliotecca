@@ -2,8 +2,8 @@ package com.twu.biblioteca;
 
 public abstract class Item {
     protected final int year;
-    protected boolean checkOutStatus;
     public String name;
+    protected boolean checkOutStatus;
 
     public Item(boolean checkOutStatus, int yearOfRelease, String movieName) {
         this.checkOutStatus = checkOutStatus;
@@ -11,7 +11,7 @@ public abstract class Item {
         this.name = movieName;
     }
 
-    public void checkOutItem(){
+    public void checkOutItem() {
         this.checkOutStatus = true;
     }
 

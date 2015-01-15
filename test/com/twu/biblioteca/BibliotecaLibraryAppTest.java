@@ -17,8 +17,8 @@ public class BibliotecaLibraryAppTest {
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     private BibliotecaLibraryApp bibliotecaLibraryApp;
     private String inputForMenu;
-    private String welComeString ="Welcome\n";
-    private String menuString ="1:Display Books\n" +
+    private String welComeString = "Welcome\n";
+    private String menuString = "1:Display Books\n" +
             "2:Display Movie\n" +
             "3:CheckOut Book\n" +
             "4:CheckOut Movie\n" +
@@ -78,7 +78,7 @@ public class BibliotecaLibraryAppTest {
         bibliotecaLibraryApp.selectOption(getScanner(inputForMenu));
 
         String expected = welComeString + menuString;
-        assertEquals(expected,byteArrayOutputStream.toString());
+        assertEquals(expected, byteArrayOutputStream.toString());
     }
 
     private Scanner getScanner(String inputForMenu) {

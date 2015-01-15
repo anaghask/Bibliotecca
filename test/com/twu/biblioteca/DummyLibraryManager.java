@@ -4,49 +4,50 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DummyLibraryManager extends LibraryManager{
-        public boolean flag;
-        public boolean checkOutFlag;
-        public boolean returnItem;
-        public boolean displayFlag;
+public class DummyLibraryManager extends LibraryManager {
+    public boolean flag;
+    public boolean checkOutFlag;
+    public boolean returnItem;
+    public boolean displayFlag;
 
-        public DummyLibraryManager(){
-            this(new Library(new ArrayList<Item>(),new ArrayList<Customer>()),new Library(new ArrayList<Item>(),new ArrayList<Customer>()),new Scanner(System.in),System.out);
-        }
-        public DummyLibraryManager(Library library,Library movieLibrary, Scanner scanner, PrintStream printStream) {
-            super(library, movieLibrary, scanner, printStream);
-            flag =false;
-        }
+    public DummyLibraryManager() {
+        this(new Library(new ArrayList<Item>(), new ArrayList<Customer>()), new Library(new ArrayList<Item>(), new ArrayList<Customer>()), new Scanner(System.in), System.out);
+    }
+
+    public DummyLibraryManager(Library library, Library movieLibrary, Scanner scanner, PrintStream printStream) {
+        super(library, movieLibrary, scanner, printStream);
+        flag = false;
+    }
 
     @Override
     public void checkOutMovie() {
-        this.checkOutFlag =true;
+        this.checkOutFlag = true;
     }
 
     @Override
     public void checkOutBook() {
-        this.checkOutFlag =true;
+        this.checkOutFlag = true;
 
     }
 
     @Override
     public void returnBook() {
-        this.returnItem =true;
+        this.returnItem = true;
     }
 
     @Override
     public void returnMovie() {
-        this.returnItem =true;
+        this.returnItem = true;
     }
 
     @Override
     public void displayBook() {
-        this.displayFlag =true;
+        this.displayFlag = true;
     }
 
     @Override
     public void displayMovie() {
-        this.displayFlag =true;
+        this.displayFlag = true;
     }
 }
 
